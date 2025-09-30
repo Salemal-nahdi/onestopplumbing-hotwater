@@ -542,8 +542,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Handle Service "View Details" buttons - Mobile click, Desktop hover
+    // Handle Service card flip effect - Mobile click, Desktop hover
+    const serviceCards = document.querySelectorAll('.service-card-advanced');
     const serviceButtons = document.querySelectorAll('.service-cta');
+    
     serviceButtons.forEach(button => {
         button.addEventListener('click', function(e) {
             // Only handle click on mobile (768px and below)
@@ -551,24 +553,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 e.preventDefault();
                 e.stopPropagation();
                 
-                // Find the service hover section in the same card
+                // Find the service card
                 const serviceCard = this.closest('.service-card-advanced');
                 if (serviceCard) {
-                    const serviceHover = serviceCard.querySelector('.service-hover');
-                    if (serviceHover) {
-                        // Toggle the details section
-                        serviceHover.classList.toggle('active');
-                        
-                        // Update button text
-                        if (serviceHover.classList.contains('active')) {
-                            this.textContent = 'Hide Details';
-                        } else {
-                            this.textContent = 'View Details';
-                        }
-                    }
+                    // Toggle the flip effect
+                    serviceCard.classList.toggle('flipped');
                 }
             }
-            // On desktop, let the hover effect handle the details display
+            // On desktop, hover handles the flip automatically
         });
         
         // Add touch event for better mobile responsiveness
@@ -581,5 +573,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 }, 150);
             }
         });
+    });
+    
+    // Reset flip state when clicking outside on mobile
+    document.addEventListener('click', function(e) {
+        if (window.innerWidth <= 768) {
+            serviceCards.forEach(card => {
+                if (!card.contains(e.target) && card.classList.contains('flipped')) {
+                    card.classList.remove('flipped');
+                }
+            });
+        }
     });
 });
