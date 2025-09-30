@@ -542,28 +542,43 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Handle Service "View Details" buttons - Simple toggle
+    // Handle Service "View Details" buttons - Mobile click, Desktop hover
     const serviceButtons = document.querySelectorAll('.service-cta');
     serviceButtons.forEach(button => {
         button.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            // Find the service hover section in the same card
-            const serviceCard = this.closest('.service-card-advanced');
-            if (serviceCard) {
-                const serviceHover = serviceCard.querySelector('.service-hover');
-                if (serviceHover) {
-                    // Toggle the details section
-                    serviceHover.classList.toggle('active');
-                    
-                    // Update button text
-                    if (serviceHover.classList.contains('active')) {
-                        this.textContent = 'Hide Details';
-                    } else {
-                        this.textContent = 'View Details';
+            // Only handle click on mobile (768px and below)
+            if (window.innerWidth <= 768) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                // Find the service hover section in the same card
+                const serviceCard = this.closest('.service-card-advanced');
+                if (serviceCard) {
+                    const serviceHover = serviceCard.querySelector('.service-hover');
+                    if (serviceHover) {
+                        // Toggle the details section
+                        serviceHover.classList.toggle('active');
+                        
+                        // Update button text
+                        if (serviceHover.classList.contains('active')) {
+                            this.textContent = 'Hide Details';
+                        } else {
+                            this.textContent = 'View Details';
+                        }
                     }
                 }
+            }
+            // On desktop, let the hover effect handle the details display
+        });
+        
+        // Add touch event for better mobile responsiveness
+        button.addEventListener('touchstart', function(e) {
+            if (window.innerWidth <= 768) {
+                // Add visual feedback for touch
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
             }
         });
     });

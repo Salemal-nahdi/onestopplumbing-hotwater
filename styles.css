@@ -1375,6 +1375,17 @@ body {
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
 }
 
+/* Desktop hover effect to show details */
+@media (min-width: 769px) {
+    .service-card-advanced:hover .service-hover {
+        display: block;
+    }
+    
+    .service-card-advanced:hover .service-cta {
+        opacity: 0.7;
+    }
+}
+
 .service-front {
     flex: 1;
     display: flex;
@@ -2643,6 +2654,13 @@ body {
         display: block;
         text-align: center;
         border-radius: 25px;
+        cursor: pointer;
+        touch-action: manipulation;
+    }
+    
+    /* Mobile-specific hover states */
+    .service-cta:active {
+        transform: scale(0.95);
     }
     
     .footer-content {
