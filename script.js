@@ -541,4 +541,23 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+    
+    // Handle Service "View Details" buttons
+    const serviceButtons = document.querySelectorAll('.service-cta');
+    serviceButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            // Find the parent service item
+            const serviceItem = this.closest('.service-item');
+            if (serviceItem) {
+                // Toggle the flip state
+                const serviceCard = serviceItem.querySelector('.service-card-advanced');
+                if (serviceCard) {
+                    serviceCard.classList.toggle('flipped');
+                }
+            }
+        });
+    });
 });
