@@ -2468,8 +2468,11 @@ body {
     .hero-buttons {
         flex-direction: column;
         align-items: center;
+        justify-content: center;
         gap: 1.2rem;
         margin-bottom: 2.5rem;
+        width: 100%;
+        text-align: center;
     }
     
     .hero-stats {
@@ -2868,6 +2871,18 @@ body {
     
     .info-icon i {
         font-size: 1.6rem;
+    }
+    
+    .contact-info-advanced {
+        align-items: center;
+        padding: 0 1rem;
+    }
+    
+    .info-card {
+        width: 100%;
+        max-width: 350px;
+        margin: 0 auto;
+        text-align: center;
     }
     
 }
