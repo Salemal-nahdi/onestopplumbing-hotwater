@@ -543,8 +543,33 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // Handle Service card flip effect - Mobile click, Desktop hover
+    const serviceItems = document.querySelectorAll('.service-item');
     const serviceCards = document.querySelectorAll('.service-card-advanced');
     const serviceButtons = document.querySelectorAll('.service-cta');
+    
+    // Prevent glitchy hover on desktop by using pointer events properly
+    if (window.innerWidth > 768) {
+        serviceItems.forEach(item => {
+            let hoverTimeout;
+            
+            item.addEventListener('mouseenter', function() {
+                clearTimeout(hoverTimeout);
+                const card = this.querySelector('.service-card-advanced');
+                if (card && !card.classList.contains('hovering')) {
+                    card.classList.add('hovering');
+                }
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                const card = this.querySelector('.service-card-advanced');
+                if (card) {
+                    hoverTimeout = setTimeout(() => {
+                        card.classList.remove('hovering');
+                    }, 100);
+                }
+            });
+        });
+    }
     
     serviceButtons.forEach(button => {
         button.addEventListener('click', function(e) {
