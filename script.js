@@ -542,20 +542,27 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Handle Service "View Details" buttons
+    // Handle Service "View Details" buttons - Simple toggle
     const serviceButtons = document.querySelectorAll('.service-cta');
     serviceButtons.forEach(button => {
         button.addEventListener('click', function(e) {
             e.preventDefault();
             e.stopPropagation();
             
-            // Find the parent service item
-            const serviceItem = this.closest('.service-item');
-            if (serviceItem) {
-                // Toggle the flip state
-                const serviceCard = serviceItem.querySelector('.service-card-advanced');
-                if (serviceCard) {
-                    serviceCard.classList.toggle('flipped');
+            // Find the service hover section in the same card
+            const serviceCard = this.closest('.service-card-advanced');
+            if (serviceCard) {
+                const serviceHover = serviceCard.querySelector('.service-hover');
+                if (serviceHover) {
+                    // Toggle the details section
+                    serviceHover.classList.toggle('active');
+                    
+                    // Update button text
+                    if (serviceHover.classList.contains('active')) {
+                        this.textContent = 'Hide Details';
+                    } else {
+                        this.textContent = 'View Details';
+                    }
                 }
             }
         });

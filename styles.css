@@ -1359,36 +1359,40 @@ body {
 }
 
 .service-card-advanced {
-    position: relative;
-    width: 100%;
-    height: 350px;
-    transition: all 0.6s ease;
-    transform-style: preserve-3d;
-}
-
-.service-card-advanced:hover,
-.service-card-advanced.flipped {
-    transform: translateZ(20px) rotateY(180deg);
-}
-
-.service-front,
-.service-hover {
-    position: absolute;
-    width: 100%;
-    height: 100%;
     background: white;
     border-radius: 20px;
-    padding: 2.5rem;
+    padding: 2rem;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    backface-visibility: hidden;
+    transition: all 0.3s ease;
+    height: auto;
+    min-height: 350px;
+    display: flex;
+    flex-direction: column;
+}
+
+.service-card-advanced:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
 }
 
 .service-front {
+    flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     justify-content: space-between;
+}
+
+.service-hover {
+    display: none;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 2px solid var(--primary-red);
+}
+
+.service-hover.active {
+    display: block;
 }
 
 .service-front h3 {
@@ -1403,18 +1407,6 @@ body {
     line-height: 1.6;
 }
 
-.service-hover {
-    background: linear-gradient(135deg, var(--primary-red), var(--dark-red));
-    color: white;
-    opacity: 0;
-    transform: rotateY(180deg);
-    transition: opacity 0.3s ease;
-}
-
-.service-card-advanced:hover .service-hover,
-.service-card-advanced.flipped .service-hover {
-    opacity: 1;
-}
 
 .service-icon-3d {
     position: relative;
@@ -1495,6 +1487,8 @@ body {
 .service-hover h4 {
     font-size: 1.3rem;
     margin-bottom: 1rem;
+    color: var(--primary-red);
+    font-weight: 600;
 }
 
 .service-hover ul {
@@ -1504,7 +1498,12 @@ body {
 
 .service-hover ul li {
     padding: 0.5rem 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid rgba(220, 38, 38, 0.1);
+    color: var(--gray-medium);
+}
+
+.service-hover ul li:last-child {
+    border-bottom: none;
 }
 
 
